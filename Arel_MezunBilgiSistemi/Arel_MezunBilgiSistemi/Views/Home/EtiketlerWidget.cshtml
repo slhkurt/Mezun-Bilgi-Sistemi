@@ -1,0 +1,16 @@
+﻿@model IEnumerable<Arel_MezunBilgiSistemi.Models.Etiketler>
+
+
+    <div class="sidebar-widget-area">
+        <h5 class="title">Etiketler</h5>
+        <div class="widget-content">
+            <ul class="tags">
+                @foreach (var etk in Model)
+                {
+                    <li><a href="/Home/EtiketeAitMakaleler/@etk.EtiketId">@etk.EtiketAdi</a></li>
+                }
+            </ul>
+        </div>
+    </div>
+
+

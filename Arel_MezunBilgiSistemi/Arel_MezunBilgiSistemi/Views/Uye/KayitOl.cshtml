@@ -1,0 +1,58 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Mosaddek">
+    <meta name="keyword" content="FlatLab, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+    <link rel="shortcut icon" href="/Content/AdminTemplate/img/favicon.png">
+    <title>kayıt Ol</title>
+    <!-- Bootstrap core CSS -->
+    <link href="/Content/AdminTemplate/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/Content/AdminTemplate/css/bootstrap-reset.css" rel="stylesheet">
+    <!--external css-->
+    <link href="/Content/AdminTemplate/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <!-- Custom styles for this template -->
+    <link href="/Content/AdminTemplate/css/style.css" rel="stylesheet">
+    <link href="/Content/AdminTemplate/css/style-responsive.css" rel="stylesheet" />
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body class="login-body">
+    <div class="container">
+        <form class="form-signin" action="/Uye/KayitOl" method="post">
+            @if (ViewBag.error != null)
+            {
+                <strong class="alert">@ViewBag.error</strong>
+            }
+            <h2 class="form-signin-heading">Şimdi Kayıt Ol</h2>
+            <div class="login-wrap">
+                <p>Kayıt Olma Sayfası</p>
+                <input type="text" class="form-control" name="AdiSoyadi" placeholder="Adınız ve Soyadınız" autofocus>
+                <input type="text" class="form-control" name="KullaniciAdi" placeholder="Kullanıcı Adı" autofocus>
+                <input type="password" class="form-control" name="Sifre" placeholder="Şifre" autofocus>
+                <input type="text" class="form-control" name="Email" placeholder="Email" autofocus>
+
+                <button class="btn btn-lg btn-login btn-block" type="submit">Kayıt Ol</button>
+                <div class="registration">
+                    Zaten Hesabınız Varmı?
+                    <a class="" href="/Uye/GirisYap">
+                        Giriş Yap
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>
+

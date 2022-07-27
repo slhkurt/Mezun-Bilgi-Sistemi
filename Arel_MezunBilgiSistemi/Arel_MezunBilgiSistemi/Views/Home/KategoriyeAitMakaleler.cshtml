@@ -1,0 +1,88 @@
+﻿@model IEnumerable<Arel_MezunBilgiSistemi.Models.Makaleler>
+@{
+    ViewBag.Title = "Kategoriye Ait Duyurular";
+}
+
+<div class="blog-wrapper section-padding-100 clearfix">
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-lg-9">
+
+                @foreach (var makale in Model)
+                {
+                    <!-- Single Blog Area  -->
+                    <div class="single-blog-area blog-style-2 mb-50 wow fadeInUp" data-wow-delay="0.2s" data-wow-duration="1000ms">
+                        <div class="row align-items-center">
+                            <div class="col-12 col-md-6">
+                                <div class="single-blog-thumbnail">
+                                    <img src="@makale.Foto" alt="@makale.Baslik">
+                                    <div class="post-date">
+                                        <a href="#">Yayın Tarihi<span>@string.Format("{0:D}", makale.YayinTarih)</span></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <!-- Blog Content -->
+                                <div class="single-blog-content">
+                                    <div class="line"></div>
+                                    <a href="#" class="post-tag">Etiket Sayısı : (@makale.Etiketlers.Count())</a>
+                                    <h4><a href="#" class="post-headline">@makale.Baslik</a></h4>
+                                    @if (makale.Icerik.Length > 100)
+                                    {
+                                        <p>@Html.Raw(makale.Icerik.Substring(0, 100))</p>
+                                    }
+                                    else
+                                    {
+                                        <p>@Html.Raw(makale.Icerik)</p>
+                                    }
+                                    <div class="post-meta">
+                                        <p>By <a href="#">@makale.Uyeler.KullaniciAdi</a></p>
+                                        <p>@makale.Yorumlars.Count()</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Load More -->
+                            <div class="load-more-btn mt-30 wow fadeInUp" data-wow-delay="0.7s" data-wow-duration="1000ms">
+                                <a href="/Home/MakaleDetay/@makale.MakaleId" class="btn original-btn">Detay</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+
+
+            <!-- ##### Sidebar Area ##### -->
+            <div class="col-12 col-md-4 col-lg-3">
+                <div class="post-sidebar-area">
+
+                    <!-- Widget Area -->
+                    <div class="sidebar-widget-area">
+                        <form action="#" class="search-form">
+                            <input type="search" name="search" id="searchForm" placeholder="Site İçi Arama Yap...">
+                            <input type="submit" value="submit">
+                        </form>
+                    </div>
+
+                    <!--Popüler makaleler Widget Area -->
+                    @{
+                        Html.RenderAction("PopulerMakaleler", "Home");
+                    }
+
+                    <!--kategoriler Widget Area -->
+                    @{
+                        Html.RenderAction("KategoriWidget", "Home");
+                    }
+
+                    <!--Etiketler Widget Area -->
+                    @{
+                        Html.RenderAction("EtiketlerWidget", "Home");
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

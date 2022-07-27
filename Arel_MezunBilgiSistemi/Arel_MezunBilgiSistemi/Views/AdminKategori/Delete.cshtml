@@ -1,0 +1,34 @@
+﻿@model Arel_MezunBilgiSistemi.Models.Kategoriler
+
+@{
+    ViewBag.Title = "Kategori Sil";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<br /><br /><br /><br />
+<h2>Kategori Silme Sayfası</h2>
+
+<h3>Bu Kategoriyi Silmek İstediğinize Eminmisiniz ?</h3>
+<div>
+    <h4>Kategoriler</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.KategoriAdi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KategoriAdi)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Sil" class="btn btn-danger" /> |
+            @Html.ActionLink("Kategoriler Sayfasına Geri Dön", "Index")
+        </div>
+    }
+</div>

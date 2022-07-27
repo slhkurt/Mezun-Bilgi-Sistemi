@@ -1,0 +1,28 @@
+﻿@model IEnumerable<Arel_MezunBilgiSistemi.Models.Makaleler>
+
+<div class="sidebar-widget-area">
+    <h5 class="title">Popüler Duyurular</h5>
+
+    <div class="widget-content">
+
+        <!-- Single Blog Post -->
+        @foreach (var mkl in Model)
+        {
+
+            <div class="single-blog-post d-flex align-items-center widget-post">
+                <!-- Post Thumbnail -->
+                <div class="post-thumbnail">
+                    <img src="@mkl.Foto" alt="@mkl.Foto" width="80">
+                </div>
+                <!-- Post Content -->
+                <div class="post-content">
+                    <a href="#" class="post-tag">Etiket Sayısı : (@mkl.Etiketlers.Count())</a>
+                    <h4><a href="/Home/MakaleDetay/@mkl.MakaleId" class="post-headline">@mkl.Baslik</a></h4>
+                    <div class="post-meta">
+                        <p><a href="#">@string.Format("{0:D}",mkl.YayinTarih)</a></p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

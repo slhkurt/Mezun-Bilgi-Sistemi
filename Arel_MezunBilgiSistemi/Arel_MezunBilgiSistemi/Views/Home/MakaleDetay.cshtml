@@ -1,0 +1,190 @@
+﻿
+@{
+    ViewBag.Title = "Duyuru Detay";
+}
+
+@using Arel_MezunBilgiSistemi.Class
+@using Arel_MezunBilgiSistemi.Models
+@model Makaleler
+
+@section head{
+    <style>
+        .images{
+            position:relative;
+            width:100% !important;
+            height:400px !important;
+        }
+    </style>
+    }
+
+<!-- ##### Single Blog Area Start ##### -->
+<div class="single-blog-wrapper section-padding-0-100">
+
+    <!-- Single Blog Area  -->
+    <div class="single-blog-area blog-style-2 mb-50">
+        <div class="single-blog-thumbnail">
+            <img src="@Model.Foto" alt="@Model.Baslik" class="images">
+            <div class="post-tag-content">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="post-date">
+                                <a href="#"><span>@string.Format("{0:D}",Model.YayinTarih)</span></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <!-- ##### Post Content Area ##### -->
+            <div class="col-12 col-lg-9">
+                <!-- Single Blog Area  -->
+                <div class="single-blog-area blog-style-2 mb-50">
+                    <!-- Blog Content -->
+                    <div class="single-blog-content">
+                        <div class="line"></div>
+
+                        @foreach (var etk in Model.Etiketlers.ToList())
+                        {
+                            <a href="#" class="post-tag">@etk.EtiketAdi</a>
+                        }
+
+                        <h4><a href="#" class="post-headline mb-0">@Model.Baslik</a></h4>
+                        <div class="post-meta mb-50">
+                            <p>By <a href="#"> @Model.Uyeler.KullaniciAdi</a></p>
+                            <p>Yorum Sayısı : (@Model.Yorumlars.Count())</p>
+                        </div>
+                        <p>@Model.Icerik</p>
+                    </div>
+                </div>
+
+                <!-- About Author -->
+                <div class="blog-post-author mt-100 d-flex">
+                    <div class="author-thumbnail">
+                        <img src="@Model.Uyeler.Foto" alt="@Model.Uyeler.AdiSoyadi">
+                    </div>
+                    <div class="author-info">
+                        <div class="line"></div>
+                        <span class="author-role">@Model.Uyeler.Yetkiler.YetkiAdi</span>
+                        <h4><a href="#" class="author-name">@Model.Uyeler.KullaniciAdi</a></h4>
+                        <p>Hello World Write Code</p>
+                    </div>
+                </div>
+
+                @if (Session["uyeid"] == null)
+                {
+                    <div class="row">
+                        <div class="alert-danger">
+                            <p class="text-primary">Lütfen Yorum Yapabilmek İçin Giriş Yapınız</p>
+                        </div>
+                        <br />
+                        <a href="/Uye/GirisYap" class="btn btn-outline-primary">Giriş Yap</a>
+                    </div>
+                }
+                else
+                {
+
+                    <!-- Comment Area Start -->
+                    <div class="comment_area clearfix mt-70">
+                        <h5 class="title">Yorum Sayısı : (@Model.Yorumlars.Count())</h5>
+
+                        <ol>
+                            <!-- Single Comment Area -->
+                            @foreach (var y in Model.Yorumlars.ToList())
+                            {
+                                <li class="single_comment_area">
+                                    <!-- Comment Content -->
+                                    <div class="comment-content d-flex">
+                                        <!-- Comment Author -->
+                                        <div class="comment-author">
+                                            <img src="@y.Uyeler.Foto" alt="@y.Uyeler.KullaniciAdi">
+                                        </div>
+                                        <!-- Comment Meta -->
+                                        <div class="comment-meta">
+                                            @{ 
+                                                DateTime zmn = (DateTime)y.Tarihi;
+                                            }
+                                            <a href="#" class="post-date">@zmn.XZaman()</a>
+                                            <p><a href="#" class="post-author">@y.Uyeler.KullaniciAdi</a></p>
+                                            <p>@y.Icerik</p>
+                                            @if (y.UyeID == Convert.ToInt32(Session["uyeid"]))
+                                            {
+                                                <a href="#" class="comment-reply btn btn-outline-danger" id="yrmSil" data-yorumsil="@y.YorumId">Sil</a>
+                                            }
+                                        </div>
+                                    </div>
+                                </li>
+                            }
+                        </ol>
+                    </div>
+
+                    <div class="post-a-comment-area mt-70">
+                        <h5>Bir Yorum Ekle</h5>
+                        <!-- Reply Form -->
+                        <form action="#" method="post">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="group">
+                                        <textarea name="message" id="yorum" required></textarea>
+                                        <span class="highlight"></span>
+                                        <span class="bar"></span>
+                                        <label>Yorumunuz</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <button type="submit" class="btn original-btn yorumyap">Yorum Yap</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ##### Single Blog Area End ##### -->
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $(".yorumyap").click(function () {
+                var yrm = $('#yorum').val();
+                $.ajax({
+                    type: "POST",
+                    url: "/Home/YorumYap",
+                    data: { yorum: yrm, id:@Model.MakaleId },
+                    dataType: 'Json',
+                    success: function () {
+                        alert("Yorumunuz Eklenmiştir");
+                    },
+                    error: function () {
+                        alert("Yorumun Eklenirken Bir Hata Oluştu");
+                    }
+                });
+            });
+        });
+    </script>
+    <script>
+        $('#yrmSil').click(function () {
+            var yrmId = $(this).data("yorumsil");
+            $.ajax({
+                type: "POST",
+                url: "/Home/Yorumsil",
+                data: { yorumID: yrmId },
+                dataType: 'Json',
+                success: function () {
+                    alert("Yorumunuz Kaldırıldı");
+                    window.location.replace("/Home/MakaleDetay/" +@Model.MakaleId);
+                },
+                error: function () {
+                    alert("Yorumunuz Kaldırılırken Bir Hata Oluştu");
+                }
+            });
+        });
+    </script>
+    }

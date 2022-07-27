@@ -1,0 +1,145 @@
+﻿@model IPagedList<Arel_MezunBilgiSistemi.Models.Makaleler>
+    @using PagedList.Mvc
+    @using PagedList
+@{
+    ViewBag.Title = "Index";
+}
+
+<!-- ##### Hero Area Start ##### -->
+<div class="hero-area">
+    <!-- Hero Slides Area -->
+    <div class="hero-slides owl-carousel">
+        <!-- Single Slide -->
+        <div class="single-hero-slide bg-img" style="background-image: url(/Content/WebSite/img/bg-img/b2.jpg);">
+            <div class="container h-100">
+                <div class="row h-100 align-items-center">
+                    <div class="col-12">
+                        <div class="slide-content text-center">
+                            <div class="post-tag">
+                                <a href="#" data-animation="fadeInUp">Arel Üniversitesi</a>
+                            </div>
+                            <h2 data-animation="fadeInUp" data-delay="250ms"><a href="single-post.html">Gençliğe Uzanan El!</a></h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Single Slide -->
+        <div class="single-hero-slide bg-img" style="background-image: url(/Content/WebSite/img/bg-img/b1.jpg);">
+            <div class="container h-100">
+                <div class="row h-100 align-items-center">
+                    <div class="col-12">
+                        <div class="slide-content text-center">
+                            <div class="post-tag">
+                                <a href="#" data-animation="fadeInUp">Arel Üniversitesi</a>
+                            </div>
+                            <h2 data-animation="fadeInUp" data-delay="250ms"><a href="single-post.html">Gençliğe Uzanan El!</a></h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Single Slide -->
+        <div class="single-hero-slide bg-img" style="background-image: url(/Content/WebSite/img/bg-img/b3.jpg);">
+            <div class="container h-100">
+                <div class="row h-100 align-items-center">
+                    <div class="col-12">
+                        <div class="slide-content text-center">
+                            <div class="post-tag">
+                                <a href="#" data-animation="fadeInUp">Arel Üniversitesi</a>
+                            </div>
+                            <h2 data-animation="fadeInUp" data-delay="250ms"><a href="single-post.html">Gençliğe Uzanan El!</a></h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ##### Hero Area End ##### -->
+<!-- ##### Blog Wrapper Start ##### -->
+<div class="blog-wrapper section-padding-100 clearfix">
+    
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-lg-9">
+
+                @foreach (var makale in Model)
+                {
+                    <!-- Single Blog Area  -->
+                <div class="single-blog-area blog-style-2 mb-50 wow fadeInUp" data-wow-delay="0.2s" data-wow-duration="1000ms">
+                    <div class="row align-items-center">
+                        <div class="col-12 col-md-6">
+                            <div class="single-blog-thumbnail">
+                                <img src="@makale.Foto" alt="@makale.Baslik">
+                                <div class="post-date">
+                                    <a href="#">Yayın Tarihi<span>@string.Format("{0:D}", makale.YayinTarih)</span></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <!-- Blog Content -->
+                            <div class="single-blog-content">
+                                <div class="line"></div>
+                                <a href="#" class="post-tag">Etiket Sayısı : (@makale.Etiketlers.Count())</a>
+                                <h4><a href="#" class="post-headline">@makale.Baslik</a></h4>
+                                @if (makale.Icerik.Length > 100)
+                                {
+                                    <p>@Html.Raw(makale.Icerik.Substring(0,100))</p>
+                                }
+                                else
+                                {
+                                    <p>@Html.Raw(makale.Icerik)</p>
+                                }
+                                <div class="post-meta">
+                                    <span>Yorumlar : (@makale.Yorumlars.Count())</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Load More -->
+                        <div class="load-more-btn mt-30 wow fadeInUp" data-wow-delay="0.7s" data-wow-duration="1000ms">
+                            <a href="/Home/MakaleDetay/@makale.MakaleId" class="btn original-btn">Detay</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="page-container">
+                    <div class="page-content">
+                        <div class="page-header">
+                            <div class="page-item">
+                                @Html.PagedListPager((IPagedList)Model, Page => Url.Action("Index", new { Page }))
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                }
+            </div>
+               
+
+            <!-- ##### Sidebar Area ##### -->
+            <div class="col-12 col-md-4 col-lg-3">
+                <div class="post-sidebar-area">
+
+
+                    <!--Popüler makaleler Widget Area -->
+                    @{
+                        Html.RenderAction("PopulerMakaleler", "Home"); 
+                     }
+
+                    <!--kategoriler Widget Area -->
+                    @{ 
+                        Html.RenderAction("KategoriWidget", "Home");
+                    }
+
+                    <!--Etiketler Widget Area -->
+                    @{ 
+                        Html.RenderAction("EtiketlerWidget", "Home");
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ##### Blog Wrapper End ##### -->

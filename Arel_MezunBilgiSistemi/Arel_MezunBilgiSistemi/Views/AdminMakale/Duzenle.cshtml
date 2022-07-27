@@ -1,0 +1,62 @@
+﻿
+@{
+    ViewBag.Title = "Duyuru Düzenle";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@using Arel_MezunBilgiSistemi.Models
+@model Makaleler
+<br /><br /><br /><br />
+<div class="row">
+    <div class="col-lg-12">
+        <section class="panel">
+            <header class="panel-heading">
+                Duyuru Düzenleme Sayfası
+            </header>
+            <div class="panel-body">
+                <form role="form" action="/AdminMakale/Duzenle" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="MakaleId" value="@Model.MakaleId" />
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Kategori Adı</label>
+                        <input type="hidden" name="KategoriID" value="@Model.KategoriID" />
+                        <input type="text" class="form-control" id="exampleInputPassword1" disabled name="KategoriID" value="@Model.Kategoriler.KategoriAdi">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Başlık</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1" name="Baslik" value="@Model.Baslik">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">İçerik</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1" name="Icerik" value="@Model.Icerik">
+                    </div>
+                    <hr />
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Eski Foto</label>
+                        <img src="@Model.Foto" alt="@Model.Baslik" />
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Yeni Foto</label>
+                        <input type="file" name="Foto" class="form-control" id="exampleInputPassword1" />
+                    </div>
+                    <hr />
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Eski Etiketler</label>
+                        @foreach (var e in Model.Etiketlers.ToList())
+                        {
+                            <p>@e.EtiketAdi</p>
+                        }
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Yeni Etiketler</label>
+                        <input type="text" name="Etiket" />
+                    </div>
+                    <hr />
+                    <button type="submit" class="btn btn-success">Kaydet</button>
+                    <a href="/AdminMakale/Index" class="btn btn-info">İptal</a>
+                </form>
+            </div>
+        </section>
+    </div>
+</div>
+
+

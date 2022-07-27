@@ -1,0 +1,36 @@
+﻿@model IEnumerable<Arel_MezunBilgiSistemi.Models.Makaleler>
+@using GridMvc.Html
+@{
+    ViewBag.Title = "AramaYap";
+}
+
+@if (ViewBag.NotFound == null)
+{
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                @Html.Grid(Model).Columns(columns =>
+           {
+               columns.Add(m => m.Kategoriler.KategoriAdi).Titled("Kategori Adı").Filterable(true).Sortable(true);
+
+               columns.Add(m => m.Baslik).Titled("Başlık").Filterable(true).Sortable(true).Sanitized(false).Encoded(false).
+               RenderValueAs(m => Html.ActionLink(m.Baslik, "MakaleDetay", "Home", new { id = m.MakaleId }, null).ToHtmlString());
+
+               columns.Add(m => m.YayinTarih).Titled("Tarih").Format("{0:D}").Sortable(true);
+           }).WithPaging(5)
+            </div>
+        </div>
+    </div>
+}
+
+else
+{
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center mt-80">
+                <h3 id="notfound">@ViewBag.Notfound !</h3>
+                <a href="/Home/Index" class="btn confer-btn m-2">Anasayfa'ya Dön<i class="zmdi zmdi-long-arrow-right"></i></a>
+            </div>
+        </div>
+    </div>
+}

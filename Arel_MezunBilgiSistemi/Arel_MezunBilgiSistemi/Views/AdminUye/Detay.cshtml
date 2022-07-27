@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewBag.Title = " Üye Detay";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@using Arel_MezunBilgiSistemi.Models
+@model Uyeler
+<br /><br /><br /><br />
+<div class="row">
+    <div class="col-lg-12">
+        <section class="panel">
+            <header class="panel-heading">
+                Üye Detay Sayfası
+            </header>
+            <div class="panel-body">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Üye Resmi</label>
+                    <img src="@Model.Foto" alt="@Model.KullaniciAdi" width="200" />
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Ad / Soyad</label>
+                    <p>@Model.AdiSoyadi</p>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Kullanıcı Adı</label>
+                    <p>@Model.KullaniciAdi</p>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Email</label>
+                    <p>@Model.Email</p>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Kayıt Tarihi</label>
+                    <p>@string.Format("{0:D}", Model.KayitTarihi)</p>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Yetkisi</label>
+                    <p>@Model.Yetkiler.YetkiAdi</p>
+                </div>
+                <br />
+                <br />
+                <a href="/AdminUye/Index" class="btn btn-success">Üyeler Sayfasına Dön</a>
+            </div>
+        </section>
+    </div>
+</div>
+
+

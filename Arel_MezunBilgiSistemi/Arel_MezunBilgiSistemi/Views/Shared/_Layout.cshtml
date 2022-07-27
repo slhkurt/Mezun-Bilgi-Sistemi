@@ -1,0 +1,211 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <!-- Title -->
+    <title>Arel Üniversitesi</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="~/Content/WebSite/img/core-img/logo.png">
+
+    <!-- Style CSS -->
+    <link rel="stylesheet" href="/Content/WebSite/style.css">
+    <link href="~/Content/PagedList.css" rel="stylesheet" />
+
+    <link href="@Url.Content("~/Content/Gridmvc.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/Css/bootstrap.min.css")" rel="stylesheet" type="text/css" />
+
+    <style>
+        .kayit {
+            position: relative;
+            padding: 0 10px;
+        }
+
+            .kayit a {
+                font-size: 18px;
+                padding: 5px;
+                font-family: ralleway !important;
+            }
+
+                .kayit a:hover {
+                    font-size: 18px;
+                    padding: 5px;
+                }
+    </style>
+
+    @RenderSection("head", false)
+
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="preload-content">
+            <div id="original-load"></div>
+        </div>
+    </div>
+
+    <!-- ##### Header Area Start ##### -->
+    <header class="header-area">
+
+        <!-- Logo Area -->
+        <div class="logo-area text-center">
+            <div class="container h-100">
+                <div class="row h-100 align-items-center">
+                    <div class="col-12">
+                        <a href="/Home/Index/" class="original-logo"><img src="~/Content/WebSite/img/core-img/logo.ico" alt=""></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Nav Area -->
+        <div class="original-nav-area" id="stickyNav">
+            <div class="classy-nav-container breakpoint-off">
+                <div class="container">
+                    <!-- Classy Menu -->
+                    <nav class="classy-navbar justify-content-between">
+
+                        <!-- Subscribe btn -->
+                        @if (Session["uyeid"] == null)
+                        {
+                            <div class="kayit">
+                                <a href="/Uye/GirisYap" data-toggle="tooltip" data-placement="bottom" title="Giriş Yap"><i class="fa fa-user" aria-hidden="true"><span> Giriş Yap</span></i></a>
+                                <a href="/Uye/KayitOl" data-toggle="tooltip" data-placement="bottom" title="Kayıt Ol"><i class="fa fa-arrow-circle-right" aria-hidden="true"><span> Kayıt Ol</span></i></a>
+                            </div>
+                        }
+
+                        else if (Convert.ToInt32(Session["yetkiid"]) == 1 || Convert.ToInt32(Session["yetkiid"]) == 2)
+                        {
+                            <div class="classynav">
+                                <ul>
+                                    <li>
+                                        <a href="/Uye/Index/@Convert.ToInt32(Session["uyeid"])">Hoşgeldin @Session["kadi"].ToString()</a>
+                                        <ul class="dropdown">
+                                            <li><a href="/Uye/Index/@Convert.ToInt32(Session["uyeid"])">Profil</a></li>
+                                            <li><a href="/AdminHome/Index">Admin Panel</a></li>
+                                            <li><a href="/Uye/CikisYap">Çıkış Yap</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        }
+
+                        else if (Convert.ToInt32(Session["yetkiid"]) == 3)
+                        {
+                            <div class="classynav">
+                                <ul>
+                                    <li>
+                                        <a href="/Uye/Index/@Convert.ToInt32(Session["uyeid"])">Hoşgeldin @Session["kadi"].ToString()</a>
+                                        <ul class="dropdown">
+                                            <li><a href="/Uye/Index/@Convert.ToInt32(Session["uyeid"])">Profil</a></li>
+                                            <li><a href="/Uye/CikisYap">Çıkış Yap</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        }
+
+                        <!-- Navbar Toggler -->
+                        <div class="classy-navbar-toggler">
+                            <span class="navbarToggler"><span></span><span></span><span></span></span>
+                        </div>
+
+                        <!-- Menu -->
+                        <div class="classy-menu" id="originalNav">
+                            <!-- close btn -->
+                            <div class="classycloseIcon">
+                                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                            </div>
+
+                            <!-- Nav Start -->
+                            <div class="classynav">
+                                <ul>
+                                    <li><a href="/Home/Index">Ana Sayfa</a></li>
+                                    <li><a href="/Home/Hakkimizda">Hakkımızda</a></li>
+                                    <li><a href="/Home/Iletisim">İletişim</a></li>
+                                </ul>
+
+                                <!-- Search Form  -->
+                                <div id="search-wrapper">
+                                    <form action="/Home/AramaYap" method="post">
+                                        <input type="text" id="search" name="aranan" placeholder="Site İçi Arama Yap....">
+                                        <div id="close-icon"></div>
+                                        <input class="d-none" type="submit" value="">
+                                    </form>
+                                </div>
+                            </div>
+                            <!-- Nav End -->
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- ##### Header Area End ##### -->
+    @RenderBody()
+    <!-- ##### Footer Area Start ##### -->
+    <footer class="footer-area text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+
+                    <!-- Footer Nav Area -->
+                    <div class="classy-nav-container breakpoint-off">
+                        <!-- Classy Menu -->
+                        <nav class="classy-navbar justify-content-center">
+
+                            <!-- Navbar Toggler -->
+                            <div class="classy-navbar-toggler">
+                                <span class="navbarToggler"><span></span><span></span><span></span></span>
+                            </div>
+
+                            <!-- Menu -->
+                            <div class="classy-menu">
+
+                                <!-- close btn -->
+                                <div class="classycloseIcon">
+                                    <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                                </div>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+        &copy;
+        <script>document.write(new Date().getFullYear());</script>  Arel <a>❤</a> <a href="#" target="_blank"><span>Üniversitesi</span></a>
+        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+
+    </footer>
+    <!-- ##### Footer Area End ##### -->
+    <!-- jQuery (Necessary for All JavaScript Plugins) -->
+    <script src="/Content/WebSite/js/jquery/jquery-2.2.4.min.js"></script>
+    <!-- Popper js -->
+    <script src="/Content/WebSite/js/popper.min.js"></script>
+    <!-- Bootstrap js -->
+    <script src="/Content/WebSite/js/bootstrap.min.js"></script>
+    <!-- Plugins js -->
+    <script src="/Content/WebSite/js/plugins.js"></script>
+    <!-- Active js -->
+    <script src="/Content/WebSite/js/active.js"></script>
+
+    <script src="@Url.Content("~/Scripts/gridmvc.min.js")" type="text/javascript"></script>
+
+    @RenderSection("scripts", false)
+
+</body>
+
+</html>

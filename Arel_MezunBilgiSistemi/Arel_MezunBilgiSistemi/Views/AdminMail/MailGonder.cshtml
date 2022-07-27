@@ -1,0 +1,82 @@
+﻿
+@{
+    ViewBag.Title = "Mail Gönder";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@using Arel_MezunBilgiSistemi.Models
+@model Uyeler
+<br /><br /><br /><br />
+<div class="row">
+    <div class="col-lg-12">
+        <section class="panel">
+            <header class="panel-heading">
+                Mail Gönderme Sayfası <br /> Kullanıcı Adı : @Model.KullaniciAdi olan Kullanıcıya E-Posta Göndermek istediğinize eminmisiniz?
+            </header>
+            <div class="panel-body">
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Ad Ve Soyad :</label>
+                    <span>@Model.AdiSoyadi</span> <br />
+                    <label for="exampleInputPassword1">Mail  Adresi :</label>
+                    <span>@Model.Email</span>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+<div class="alert">
+    <div class="col-md-8">
+        @if (ViewBag.hata != null)
+        {
+            <strong class="text-danger">@ViewBag.hata</strong>
+        }
+        @if (ViewBag.succes != null)
+        {
+            <strong class="text-success">@ViewBag.succes</strong>
+        }
+    </div>
+</div>
+<div class="inbox-body">
+    <a class="btn btn-compose" data-toggle="modal" href="#myModal">
+        Mail Gönder
+    </a>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Gmail</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" role="form" action="/AdminMail/MailGonder/@Model.UyeId" method="post">
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">Kime</label>
+                            <input type="hidden" name="@Model.UyeId" value="@Model.UyeId" />
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" name="Mail" id="inputEmail1" value="@Model.Email">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">Konu</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" name="Konu" id="inputPassword1" placeholder="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">Mesaj</label>
+                            <div class="col-lg-10">
+                                <textarea name="Mesaj" class="form-control" cols="30" rows="10"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-offset-2 col-lg-10">
+                                <button type="submit" class="btn btn-send">Gönder</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+</div>

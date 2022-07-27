@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Arel_MezunBilgiSistemi.Models.Makaleler>
+@{
+    ViewBag.Title = "Duyurular";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@section head{
+    <style>
+        .rightbtn{
+            margin-left:985px !important;
+        }
+    </style>
+    }
+<br /><br /><br /><br />
+<div class="row">
+    <div class="col-lg-12">
+        <section class="panel">
+            <header class="panel-heading">
+                Duyurular
+                <a href="/AdminMakale/Ekle" class="btn btn-success rightbtn"><span>Duyuru Ekle</span></a>
+            </header>
+            <table class="table table-striped table-advance table-hover">
+                <thead>
+                    <tr>
+                        <th> Kategori Adı</th>
+                        <th> Başlık</th>
+                        <th> İçerik</th>
+                        <th> Foto</th>
+                        <th> Ayarlar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var m in Model)
+                    {
+                        <tr>
+                            <td><a href="#">@m.Kategoriler.KategoriAdi</a></td>
+                            <td><a href="#">@m.Baslik</a></td>
+                            <td><a href="#">@m.Icerik</a></td>
+                            <td><a href="#">@string.Format("{0:D}",m.YayinTarih)</a></td>
+                            <td><img src="@m.Foto" alt="@m.Baslik" width="50" /></td>
+                            <td>
+                                <a href="/AdminMakale/Detay/@m.MakaleId" class="btn btn-success btn-xs"><i class="icon-ok"></i></a>
+                                <a href="/AdminMakale/Duzenle/@m.MakaleId" class="btn btn-primary btn-xs"><i class="icon-pencil"></i></a>
+                                <a href="/AdminMakale/Sil/@m.MakaleId" class="btn btn-danger btn-xs"><i class="icon-trash "></i></a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </section>
+    </div>
+</div>
+

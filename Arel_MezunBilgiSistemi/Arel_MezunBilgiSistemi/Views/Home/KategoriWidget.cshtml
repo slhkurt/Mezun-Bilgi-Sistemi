@@ -1,0 +1,17 @@
+﻿@model IEnumerable<Arel_MezunBilgiSistemi.Models.Kategoriler>
+@{
+    ViewBag.Title = "KategoriWidget";
+}
+
+<div class="sidebar-widget-area">
+    <h5 class="title">Kategoriler</h5>
+    <div class="widget-content">
+        <ul class="kategori">
+            @foreach (var k in Model)
+            {
+                <li><a href="/Home/KategoriyeAitMakaleler/@k.kategoriId">@k.KategoriAdi <span class="float-right">(@k.Makalelers.Count())</span></a></li>
+            }
+        </ul>
+    </div>
+</div>
+

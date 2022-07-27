@@ -1,0 +1,83 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Mosaddek">
+    <meta name="keyword" content="FlatLab, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+    <link rel="shortcut icon" href="/Content/AdminTemplate/img/favicon.png">
+    <title>Giriş Yap</title>
+    <!-- Bootstrap core CSS -->
+    <link href="/Content/AdminTemplate/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/Content/AdminTemplate/css/bootstrap-reset.css" rel="stylesheet">
+    <!--external css-->
+    <link href="/Content/AdminTemplate/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <!-- Custom styles for this template -->
+    <link href="/Content/AdminTemplate/css/style.css" rel="stylesheet">
+    <link href="/Content/AdminTemplate/css/style-responsive.css" rel="stylesheet" />
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body class="login-body">
+    <div class="container">
+        <form class="form-signin" action="/Uye/GirisYap" method="post">
+            @if (ViewBag.hata != null)
+            {
+                <strong class="alert">@ViewBag.hata</strong>
+            }
+            @if (ViewBag.bos != null)
+            {
+                <strong class="alert">@ViewBag.bos</strong>
+            }
+            <h2 class="form-signin-heading">Giriş Yapma Sayfası</h2>
+            <div class="login-wrap">
+                <input type="text" class="form-control" name="kadi" placeholder="Kullanıcı Adı" autofocus>
+                <input type="password" class="form-control" name="sifre" placeholder="Şifre">
+                <br />
+                <button class="btn btn-lg btn-login btn-block" type="submit">Giriş Yap</button>
+                <div class="registration">
+                    Henüz Hesabınız Yok mu?
+                    <a class="" href="/Uye/KayitOl">
+                        Kayıt Ol
+                    </a>
+                </div>
+            </div>
+            <!-- Modal -->
+            <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title">Forgot Password ?</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>Enter your e-mail address below to reset your password.</p>
+                            <input type="text" name="email" placeholder="Email" autocomplete="off" class="form-control placeholder-no-fix">
+                        </div>
+                        <div class="modal-footer">
+                            <button data-dismiss="modal" class="btn btn-default" type="button">Cancel</button>
+                            <button class="btn btn-success" type="button">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- modal -->
+        </form>
+    </div>
+
+    <!-- js placed at the end of the document so the pages load faster -->
+    <script src="/Content/AdminTemplate/js/jquery.js"></script>
+    <script src="/Content/AdminTemplate/js/bootstrap.min.js"></script>
+
+</body>
+</html>
+

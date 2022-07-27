@@ -1,0 +1,51 @@
+﻿
+@{
+    ViewBag.Title = "Duyuru Ekle";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@using Arel_MezunBilgiSistemi.Models
+@model Kategoriler
+<br /><br /><br /><br />
+<div class="row">
+    <div class="col-lg-12">
+        <section class="panel">
+            <header class="panel-heading">
+                Duyuru Ekleme Sayfası
+            </header>
+            <div class="panel-body">
+                <form role="form" action="/AdminMakale/Ekle" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Kategori Adı</label>
+                        <select class="form-control m-bot15" name="kategoriId">
+                            @foreach (Kategoriler k in ViewBag.ktg)
+                            {
+                                <option value="@k.kategoriId">@k.KategoriAdi</option>
+
+                            }
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Başlık</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1" name="Baslik" placeholder="Başlık....">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">İçerik</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1" name="Icerik" placeholder="İçerik....">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Foto</label>
+                        <input type="file" class="form-control" id="Foto" name="Foto">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Etiketler</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1" name="Etiket" placeholder="Etiketleri Virgül İle Ayırınız....">
+                    </div>
+                    <button type="submit" class="btn btn-success">Kaydet</button>
+                    <a href="/AdminMakale/Index" class="btn btn-info">İptal</a>
+                </form>
+            </div>
+        </section>
+    </div>
+</div>
+
